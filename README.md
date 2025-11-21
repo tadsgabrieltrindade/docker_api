@@ -6,6 +6,22 @@ Projeto de aprendizado de Docker com uma API simples em Node.js + Express.
 
 ---
 
+## 📑 Índice
+
+- [O que é Docker?](#-o-que-é-docker)
+- [Conceitos Aplicados](#️-conceitos-aplicados)
+  - [Dockerfile](#1️⃣-dockerfile)
+  - [Imagem vs Container](#2️⃣-imagem-vs-container)
+  - [.dockerignore](#3️⃣-dockerignore)
+- [Comandos Docker Utilizados](#-comandos-docker-utilizados)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Testando a API](#-testando-a-api)
+- [Comandos Rápidos](#-comandos-rápidos)
+- [Aprendizados](#-aprendizados)
+- [Recursos](#-recursos)
+
+---
+
 ## 📋 O que é Docker?
 
 Docker é uma plataforma que permite **empacotar aplicações** e suas dependências em **containers**. Um container é como uma "caixa isolada" que contém tudo que a aplicação precisa para rodar (código, bibliotecas, Node.js, etc.).
@@ -169,7 +185,8 @@ docker_api/
 ├── package.json        # Dependências Node.js
 ├── Dockerfile          # Instruções para criar a imagem
 ├── .dockerignore       # Arquivos ignorados no build
-└── .gitignore          # Arquivos ignorados no Git
+├── .gitignore          # Arquivos ignorados no Git
+└── README.md           # Documentação do projeto
 ```
 
 ---
