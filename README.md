@@ -44,6 +44,9 @@ O `Dockerfile` é a "receita" para criar uma imagem Docker. Cada linha é uma in
 ```dockerfile
 FROM node:24              # Imagem base (Node.js versão 24)
 WORKDIR /app-node         # Diretório de trabalho dentro do container
+ARG PORT_BUILD=6000       # Argumento de build (valor padrão: 6000)
+ENV PORT=${PORT_BUILD}    # Variável de ambiente usando o argumento
+EXPOSE ${PORT_BUILD}      # Documenta a porta que o container expõe
 COPY . .                  # Copia arquivos do projeto para o container
 RUN npm install           # Instala dependências
 ENTRYPOINT npm start      # Comando executado ao iniciar o container
@@ -52,9 +55,25 @@ ENTRYPOINT npm start      # Comando executado ao iniciar o container
 **Detalhamento:**
 - **FROM**: Define a imagem base (já vem com Node.js instalado)
 - **WORKDIR**: Cria e define o diretório onde os comandos serão executados
+- **ARG**: Define um argumento que pode ser passado durante o build com `--build-arg`
+- **ENV**: Define uma variável de ambiente disponível no container
+- **EXPOSE**: Documenta qual porta o container usa (não publica automaticamente)
 - **COPY**: Copia arquivos do host para o container
 - **RUN**: Executa comandos durante a construção da imagem
 - **ENTRYPOINT**: Define o comando principal do container
+
+**🔑 Diferença entre ARG e ENV:**
+- **ARG**: Disponível apenas durante o build da imagem
+- **ENV**: Disponível durante o build E na execução do container
+
+**💡 Exemplo com porta customizada:**
+```bash
+# Build com porta padrão (6000)
+docker build -t gabrieltrindade/app-node:1.0 .
+
+# Build com porta customizada
+docker build -t gabrieltrindade/app-node:1.0 --build-arg PORT_BUILD=8080 .
+```
 
 ---
 
@@ -93,11 +112,16 @@ node_modules     # Não copiar dependências locais
 ### 🔨 Construir a Imagem
 
 ```bash
+# Build com porta padrão (6000)
 docker build -t gabrieltrindade/app-node:1.0 .
+
+# Build com porta customizada (usando ARG)
+docker build -t gabrieltrindade/app-node:1.0 --build-arg PORT_BUILD=8080 .
 ```
 
 - `build`: Constrói a imagem
 - `-t`: Define a tag (nome:versão)
+- `--build-arg`: Passa argumentos para o Dockerfile (ARG)
 - `.`: Contexto (diretório atual)
 
 ---
@@ -105,17 +129,23 @@ docker build -t gabrieltrindade/app-node:1.0 .
 ### ▶️ Executar o Container
 
 ```bash
-docker run -d -p 8081:3000 gabrieltrindade/app-node:1.0
+# Com a porta padrão definida no Dockerfile (6000)
+docker run -d -p 8081:6000 gabrieltrindade/app-node:1.0
+
+# Ou se você fez build com porta customizada (ex: 8080)
+docker run -d -p 8081:8080 gabrieltrindade/app-node:1.0
 ```
 
 - `run`: Cria e inicia um container
 - `-d`: Modo **detached** (background)
-- `-p 8081:3000`: Mapeia porta **host:container**
+- `-p 8081:6000`: Mapeia porta **host:container**
   - `8081` → Porta no seu computador
-  - `3000` → Porta dentro do container
+  - `6000` → Porta dentro do container (definida por ENV PORT)
 - `gabrieltrindade/app-node:1.0`: Imagem a ser usada
 
 **Acesso:** http://localhost:8081
+
+**💡 Dica:** A porta do container deve corresponder ao valor de `PORT_BUILD` usado no build.
 
 ---
 
@@ -211,11 +241,14 @@ curl http://localhost:8081
 ## 📚 Comandos Rápidos
 
 ```bash
-# Build da imagem
+# Build da imagem (porta padrão)
 docker build -t gabrieltrindade/app-node:1.0 .
 
-# Rodar container
-docker run -d -p 8081:3000 gabrieltrindade/app-node:1.0
+# Build da imagem (porta customizada)
+docker build -t gabrieltrindade/app-node:1.0 --build-arg PORT_BUILD=8080 .
+
+# Rodar container (ajuste a porta do container conforme o build)
+docker run -d -p 8081:6000 gabrieltrindade/app-node:1.0
 
 # Ver containers rodando
 docker ps
@@ -239,7 +272,10 @@ docker rmi gabrieltrindade/app-node:1.0
 
 - ✅ Como criar um `Dockerfile`
 - ✅ Diferença entre imagem e container
-- ✅ Build de imagens Docker
+- ✅ Uso de **ARG** para argumentos de build
+- ✅ Uso de **ENV** para variáveis de ambiente
+- ✅ Comando **EXPOSE** para documentar portas
+- ✅ Build de imagens Docker com argumentos customizados
 - ✅ Execução de containers em background
 - ✅ Mapeamento de portas (port binding)
 - ✅ Gerenciamento básico de containers
