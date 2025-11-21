@@ -6,6 +6,6 @@ app.get('/', (req, res) => {
     res.status(200).send({message: "Hello Docker!"})
 })
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Servidor no ar!")
 })
