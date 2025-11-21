@@ -13,6 +13,7 @@ Projeto de aprendizado de Docker com uma API simples em Node.js + Express.
   - [Dockerfile](#1️⃣-dockerfile)
   - [Imagem vs Container](#2️⃣-imagem-vs-container)
   - [.dockerignore](#3️⃣-dockerignore)
+  - [Docker Hub e Repositórios](#4️⃣-docker-hub-e-repositórios)
 - [Comandos Docker Utilizados](#-comandos-docker-utilizados)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Testando a API](#-testando-a-api)
@@ -104,6 +105,84 @@ node_modules     # Não copiar dependências locais
 - ⚡ Reduz tamanho da imagem
 - 🚀 Acelera o build
 - 🔒 Evita conflitos de dependências entre SO
+
+---
+
+### 4️⃣ **Docker Hub e Repositórios**
+
+**Docker Hub** é um registro público de imagens Docker (similar ao GitHub para código). Permite armazenar, compartilhar e distribuir imagens Docker.
+
+#### 🏷️ **Tags (Versões)**
+
+Tags são usadas para versionar imagens Docker. A sintaxe é:
+
+```
+usuário/nome-imagem:tag
+```
+
+**Exemplos:**
+- `iamgabstrindade/app-node:1.0` → Versão 1.0
+- `iamgabstrindade/app-node:1.1` → Versão 1.1
+- `iamgabstrindade/app-node:latest` → Última versão (padrão)
+
+**💡 Boas práticas de tags:**
+- Use versões semânticas: `1.0.0`, `2.1.3`
+- Tag `latest` para a versão mais recente
+- Tags descritivas: `prod`, `dev`, `staging`
+
+---
+
+#### 📤 **Publicando Imagens no Docker Hub**
+
+**Passo 1: Login no Docker Hub**
+```bash
+docker login
+```
+- Insira seu username e password do Docker Hub
+
+**Passo 2: Criar a imagem com seu username**
+```bash
+docker build -t iamgabstrindade/app-node:1.1 .
+```
+
+**Passo 3: Fazer push da imagem**
+```bash
+docker push iamgabstrindade/app-node:1.1
+```
+
+---
+
+#### 🏷️ **Criando Tags Adicionais**
+
+```bash
+# Criar uma nova tag a partir de uma imagem existente
+docker tag iamgabstrindade/app-node:1.1 iamgabstrindade/app-node:latest
+
+# Fazer push da nova tag
+docker push iamgabstrindade/app-node:latest
+```
+
+---
+
+#### 📥 **Baixando Imagens do Docker Hub**
+
+```bash
+# Baixar uma imagem específica
+docker pull iamgabstrindade/app-node:1.1
+
+# Baixar a versão latest (padrão)
+docker pull iamgabstrindade/app-node
+```
+
+---
+
+#### 🔍 **Benefícios do Docker Hub**
+
+- ✅ **Compartilhamento**: Distribua suas imagens publicamente ou privadamente
+- ✅ **Versionamento**: Mantenha múltiplas versões da mesma imagem
+- ✅ **Portabilidade**: Acesse suas imagens de qualquer lugar
+- ✅ **CI/CD**: Integre com pipelines de deploy automatizado
+- ✅ **Backup**: Suas imagens ficam armazenadas na nuvem
 
 ---
 
@@ -207,6 +286,49 @@ docker rmi gabrieltrindade/app-node:1.0
 
 ---
 
+### 🔐 Login no Docker Hub
+
+```bash
+docker login
+```
+
+Insira suas credenciais do Docker Hub para fazer push de imagens.
+
+---
+
+### 🏷️ Criar Tag para uma Imagem
+
+```bash
+# Criar uma tag a partir de uma imagem existente
+docker tag iamgabstrindade/app-node:1.1 iamgabstrindade/app-node:latest
+```
+
+---
+
+### 📤 Publicar Imagem no Docker Hub
+
+```bash
+# Push de uma versão específica
+docker push iamgabstrindade/app-node:1.1
+
+# Push de múltiplas tags
+docker push iamgabstrindade/app-node:latest
+```
+
+---
+
+### 📥 Baixar Imagem do Docker Hub
+
+```bash
+# Baixar versão específica
+docker pull iamgabstrindade/app-node:1.1
+
+# Baixar latest (padrão)
+docker pull iamgabstrindade/app-node
+```
+
+---
+
 ## 📂 Estrutura do Projeto
 
 ```
@@ -242,13 +364,13 @@ curl http://localhost:8081
 
 ```bash
 # Build da imagem (porta padrão)
-docker build -t gabrieltrindade/app-node:1.0 .
+docker build -t iamgabstrindade/app-node:1.1 .
 
 # Build da imagem (porta customizada)
-docker build -t gabrieltrindade/app-node:1.0 --build-arg PORT_BUILD=8080 .
+docker build -t iamgabstrindade/app-node:1.1 --build-arg PORT_BUILD=8080 .
 
 # Rodar container (ajuste a porta do container conforme o build)
-docker run -d -p 8081:6000 gabrieltrindade/app-node:1.0
+docker run -d -p 8081:6000 iamgabstrindade/app-node:1.1
 
 # Ver containers rodando
 docker ps
@@ -263,7 +385,20 @@ docker logs <id>
 docker rm <id>
 
 # Remover imagem
-docker rmi gabrieltrindade/app-node:1.0
+docker rmi iamgabstrindade/app-node:1.1
+
+# Login no Docker Hub
+docker login
+
+# Criar tag adicional
+docker tag iamgabstrindade/app-node:1.1 iamgabstrindade/app-node:latest
+
+# Push para Docker Hub
+docker push iamgabstrindade/app-node:1.1
+docker push iamgabstrindade/app-node:latest
+
+# Pull do Docker Hub
+docker pull iamgabstrindade/app-node:1.1
 ```
 
 ---
@@ -280,6 +415,10 @@ docker rmi gabrieltrindade/app-node:1.0
 - ✅ Mapeamento de portas (port binding)
 - ✅ Gerenciamento básico de containers
 - ✅ Uso do `.dockerignore`
+- ✅ **Tags** e versionamento de imagens
+- ✅ Publicar imagens no **Docker Hub**
+- ✅ Login e autenticação no Docker Hub
+- ✅ Download de imagens de repositórios remotos
 
 ---
 
