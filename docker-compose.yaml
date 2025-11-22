@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  app: 
+    image: iamgabstrindade/app-node:1.3
+    networks:
+      - compose-bridge
+    ports:
+      - 3000:6000
+
+
+networks:
+  compose-bridge:
+    driver: bridge
