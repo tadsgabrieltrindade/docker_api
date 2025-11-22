@@ -48,6 +48,7 @@ docker run -d -p 3000:6000 iamgabstrindade/app-node:1.3
 - [Comandos Rápidos](#-comandos-rápidos)
 - [Aprendizados](#-aprendizados)
 - [Recursos](#-recursos)
+- [Certificado do Curso](#-certificado-do-curso)
 
 ---
 
@@ -983,6 +984,8 @@ docker compose exec app sh
 ---
 
 ## 🎓 Certificado do Curso
+
+**Validar Certificado:** [Alura - Certificado Oficial](https://cursos.alura.com.br/certificate/gabriel-rtrindade/docker-criando-gerenciando-containers)
 
 <details>
 <summary>📜 Ver Certificados</summary>
