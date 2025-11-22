@@ -738,7 +738,10 @@ docker pull iamgabstrindade/app-node
 
 ```
 docker_api/
-├── CODE/                 # Pasta com o código da aplicação
+├── assets/              # Imagens e recursos
+│   ├── Certificado.jpg  # Certificado em PT-BR
+│   └── Certificate.jpg  # Certificado em EN
+├── CODE/                # Pasta com o código da aplicação
 │   ├── app.js           # Servidor Express
 │   └── package.json     # Dependências Node.js
 ├── Dockerfile           # Instruções para criar a imagem
@@ -976,6 +979,21 @@ docker compose exec app sh
 - [Docker Hub](https://hub.docker.com/)
 - [Repositório da Imagem no Docker Hub](https://hub.docker.com/r/iamgabstrindade/app-node)
 - [Curso Alura - Docker](https://cursos.alura.com.br/course/docker-criando-gerenciando-containers)
+
+---
+
+## 🎓 Certificado do Curso
+
+<details>
+<summary>📜 Ver Certificados</summary>
+
+### Português (PT-BR)
+![Certificado em Português](assets/Certificado.jpg)
+
+### English (EN)
+![Certificate in English](assets/Certificate.jpg)
+
+</details>
 
 ---
 
