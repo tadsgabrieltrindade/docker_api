@@ -3,6 +3,6 @@ WORKDIR /app-node
 ARG PORT_BUILD=6000 
 ENV PORT=${PORT_BUILD}
 EXPOSE ${PORT_BUILD}
-COPY . .
+COPY ./CODE .
 RUN npm install
 ENTRYPOINT npm start
