@@ -10,13 +10,23 @@ Projeto de aprendizado de Docker com uma API simples em Node.js + Express.
 
 ## 🚀 Quick Start
 
+### Opção 1: Docker Compose (Recomendado)
+
+```bash
+# Clonar o repositório e executar
+docker compose up -d
+
+# Acessar: http://localhost:3000
+```
+
+### Opção 2: Docker Run (Manual)
+
 ```bash
 # Baixar e executar a última versão
 docker pull iamgabstrindade/app-node:1.3
 docker run -d -p 3000:6000 iamgabstrindade/app-node:1.3
 
-# Acessar
-# http://localhost:3000
+# Acessar: http://localhost:3000
 ```
 
 ---
