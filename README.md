@@ -987,16 +987,11 @@ docker compose exec app sh
 
 **Validar Certificado:** [Alura - Certificado Oficial](https://cursos.alura.com.br/certificate/gabriel-rtrindade/docker-criando-gerenciando-containers)
 
-<details>
-<summary>📜 Ver Certificados</summary>
-
 ### Português (PT-BR)
 ![Certificado em Português](assets/Certificado.jpg)
 
 ### English (EN)
 ![Certificate in English](assets/Certificate.jpg)
-
-</details>
 
 ---
 
